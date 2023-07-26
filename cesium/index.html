@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World!</title>
+        <script src="Cesium/Cesium.js"></script>
+        <style>
+            @import url(Cesium/Widgets/widgets.css);
+
+            html, body, #cesiumContainer {
+                height: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+            body {
+                background: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="cesiumContainer"></div>
+        <script>
+            var globe=new Cesium.SingleTileImageryProvider({url : 'latlon_reimer.jpg'});
+            var cv = new Cesium.Viewer('cesiumContainer',{
+				homeButton: false,
+                geocoder: false,
+                animation: false,
+                timeline: false,
+                navigationInstructionsInitiallyVisible: false,
+                navigationHelpButton: false,
+                baseLayerPicker: false,
+                sceneModePicker: false,
+                selectionIndicator: false,
+                imageryProvider: globe,
+                contextOptions:{webgl:{alpha:true}},
+                skyBox: new Cesium.SkyBox({show:false})
+			});
+            // no sky, no background for Cesium
+            cv.scene.moon.show=false;
+            cv.scene.sun.show=false;
+            cv.scene.skyAtmosphere.show=false;
+            cv.scene.skyBox.destroy();
+            cv.scene.skyBox=undefined;
+            cv.scene.fxaa = false; // workaround of a bug for transparent background
+            cv.scene.backgroundColor = Cesium.Color.TRANSPARENT; 
+        </script>
+    </body>
+</html>
