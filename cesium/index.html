@@ -16,12 +16,40 @@
             }
             body {
                 background: black;
+            }    
+            #zoomButtons {
+                position: absolute; top: 10px; left: 10px;
+            }
+            #zoomButtons input {
+                display: block; width: 30px; height: 30px;
+                border-radius: 5px;
+                border: solid 1px #444444; margin: 5px 0;
+                background: #333333; color: #fff; font-size: 20px;
+            }
+            #zoomButtons input:hover {
+                background: #48b; border-color: #aef;
             }
         </style>
     </head>
     <body>
         <div id="cesiumContainer"></div>
+        <div id="zoomButtons">
+            <input type="button" value="+" onclick="zoomIn()" />
+            <input type="button" value="−" onclick="zoomOut()" />
+        </div>
         <script>
+            function height(p) { return Math.sqrt(p.x*p.x+p.y*p.y+p.z*p.z)-6371000; }
+            
+            function zoomIn() {
+                let h = height(cv.camera.position);
+                cv.camera.zoomIn(h/2);
+            }
+            
+            function zoomOut() {
+                let h = height(cv.camera.position);
+                cv.camera.zoomOut(h);
+            }
+
             var globe=new Cesium.SingleTileImageryProvider({url : 'latlon_reimer.jpg'});
             var cv = new Cesium.Viewer('cesiumContainer',{
 				homeButton: false,
