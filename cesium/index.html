@@ -28,7 +28,9 @@
             }
             #zoomButtons input:hover {
                 background: #48b; border-color: #aef;
+                box-shadow: 0 0 8px #aef;
             }
+            .cesium-credit-image a { pointer-events: none; cursor: pointer; }
         </style>
     </head>
     <body>
@@ -52,7 +54,7 @@
 
             var globe=new Cesium.SingleTileImageryProvider({url : 'latlon_reimer.jpg'});
             var cv = new Cesium.Viewer('cesiumContainer',{
-				homeButton: false,
+				//homeButton: false,
                 geocoder: false,
                 animation: false,
                 timeline: false,
